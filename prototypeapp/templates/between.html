@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        //alert('call')
+        window.onload = function(){
+            document.forms['bt'].submit();
+        }
+    </script>
+</head>
+<body>
+
+    <h2>PayU Form</h2>
+<br/>
+{% if error %}
+
+    <span style="color:red">Please fill all mandatory fields.</span>
+    <br/>
+    <br/>
+{% endif %}
+
+<form action="/home" method="post" id="bt"> {% csrf_token %}
+    <input type="hidden" name="key" value="{{ MERCHANT_KEY }}"/>
+    <input type="hidden" name="hash_string" value="{{ hash_string }}"/>
+    <input type="hidden" name="hash" value="{{ hashh }}"/>
+    <input type="hidden" name="posted" value="{{ posted }}"/>
+    <input type="hidden" name="txnid" value="{{ txnid }}"/>
+    <table>
+        <tr>
+            <td><b>Mandatory Parameters</b></td>
+        </tr>
+        <tr>
+            <input type="hidden" name="bid" value= {{bid}}>
+            <td>Amount:</td>
+            <td><input readonly name="amount" value={{ total }}></td>
+            <td>First Name:</td>
+            <td><input readonly name="firstname" id="firstname" value={{ rows.0.0 }}></td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td><input readonly name="email" id="email" value={{ rows.0.1 }}></td>
+            <td>Phone:</td>
+            <td><input readonly name="phone" value={{ rows.0.2 }}></td>
+        </tr>
+        <tr>
+            <td>Product Info:</td>
+            <td colspan="3"><textarea readonly name="productinfo" >{{ bid }},{{ request.session.lid }}</textarea></td>
+        </tr>
+        <tr>
+            <td>Success URI:</td>
+            <td colspan="3"><input name="surl" value="http://ec2-18-222-193-100.us-east-2.compute.amazonaws.com:8000/success" size="64"/></td>
+        </tr>
+        <tr>
+            <td>Failure URI:</td>
+            <td colspan="3"><input name="furl" value="http://ec2-18-222-193-100.us-east-2.compute.amazonaws.com:8000/failure" size="64"/></td>
+        </tr>
+
+        <tr>
+            <td colspan="3"><input type="hidden" name="service_provider" value="payu_paisa" size="64"/></td>
+        </tr>
+        <br>
+        <td colspan="4"><input type="submit" value="Submit"/></td>
+
+
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>

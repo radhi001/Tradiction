@@ -1,0 +1,47 @@
+from django.urls import path, re_path
+
+from . import views
+
+urlpatterns = [
+
+    path('', views.index, name='index'),
+    re_path('^registration$', views.registration, name='registration'),
+    re_path(r'^expertregistration$', views.expertregistration, name='expertregistration'),
+    re_path(r'^login$', views.login, name='login'),
+    re_path(r'^logout$', views.logout, name='logout'),
+    re_path(r'^forgotpwd$', views.forgotpwd, name='forgotpwd'),
+    re_path(r'^getpwd$', views.getpwd, name='getpwd'),
+    re_path(r'^addtrader$', views.addtrader, name='addtrader'),
+    re_path(r'^addexpert$', views.addexpert, name='addexpert'),
+    re_path(r'^logindata$', views.logindata, name='logindata'),
+    re_path(r'^verifyexpert$', views.verifyexpert,name='verifyexpert'),
+    re_path(r'^verifytrader$', views.verifytrader,name='verifytrader'),
+    re_path(r'^acceptexpert$', views.acceptexpert,name='acceptexpert'),
+    re_path(r'^rejectexpert$', views.rejectexpert,name='rejectexpert'),
+    re_path(r'^rejecttrader$', views.rejecttrader,name='rejecttrader'),
+    re_path(r'^accepttrader$', views.accepttrader,name='accepttrader'),
+    re_path(r'^index$', views.index, name='index'),
+    re_path(r'^stocks$', views.stocks, name='stocks'),
+    re_path(r'^news$', views.news, name='news'),
+    re_path(r'^watchlist$', views.watchlist, name='watchlist'),
+    re_path(r'^help$', views.help, name='help'),
+    re_path(r'^portfolio$', views.portfolio, name='portfolio'),
+    re_path(r'^tradinghistory$', views.tradinghistory, name='tradinghistory'),
+   # re_path(r'^search$', views.search, name='search'),
+    re_path(r'^stockdetails$', views.stockdetails, name='stockdetails'),
+    re_path(r'^addtowatchlist', views.addtowatchlist, name='addtowatchlist'),
+    re_path(r'^removefromwatchlist', views.removefromwatchlist, name='removefromwatchlist'),
+    re_path(r'^addstocks$', views.addstocks, name='addstocks'),
+    re_path(r'^buystocks$', views.buystocks, name='buystocks'),
+    re_path(r'^sellstocks$', views.sellstocks, name='sellstocks'),
+    re_path(r'^sells$', views.sells, name='sells'),
+    re_path(r'^between', views.between, name='between'),
+    re_path(r'^home', views.Home, name='home'),
+    re_path(r'^success', views.success, name='success'),
+    re_path(r'^failure', views.failure, name='failure'),
+    re_path(r'^myprofile', views.myprofile, name='myprofile'),
+    re_path(r'^updateinfo', views.updateinfo, name='updateinfo'),
+    re_path(r'^updatebankinfo', views.updatebankinfo, name='updatebankinfo'),
+    re_path(r'^updatepwd', views.updatepwd, name='updatepwd'),
+
+]

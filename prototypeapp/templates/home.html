@@ -1,0 +1,146 @@
+<html>
+<head>{% include 'header.html' %}
+    <!-- Font -->
+    <link rel="stylesheet" type="text/css" href="css/fonts.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        body {
+            margin: 0 0 8px 0;
+        }
+
+        .bg {
+            height: 320px;
+            font-family: "Open Sans", Arial, sans-serif;
+            font-style: normal;
+            background-image: url(../static/bg.jpg);
+            background-position: center;
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-color: rgba(41, 43, 44, 0.9);
+            background-blend-mode: darken;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slogan {
+            font-size: 40px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            margin-top: 0;
+        }
+
+        .intro {
+            font-size: 22px;
+            font-weight: 400;
+            width: 75%;
+            margin: auto;
+        }
+
+        .title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            letter-spacing: .12em;
+        }
+
+        table {
+            /*font-family: Arial, sans-serif;*/
+            /*border-collapse: collapse;*/
+            border-left: 0;
+            border-right: 0;
+            width: 100%;
+            margin: 0;
+        }
+
+        td, th {
+            font-family: "Open Sans", Arial, sans-serif;
+            border: 1px solid #dddddd;
+            border-left: 0;
+            border-right: 0;
+            text-align: left;
+            padding: 15px;
+        }
+
+        /*tr:nth-child(even) {*/
+        /*    background-color: #dddddd;*/
+        /*}*/
+
+        .newsLinks {
+            color: black;
+            font-size: 16px;
+            text-decoration: none;
+        }
+
+        .newsLinks:hover {
+            color: green;
+            text-decoration: none;
+        }
+
+    </style>
+   </head>
+   <body>
+      <section class="bg jumbotron-fluid text-center">
+        <div class="container-fluid text-center">
+            <h1 class="slogan">Invest with us!</h1>
+            <p class="lead intro">Tradiction offers the latest in stock news, as well as a platform to easily view, buy, and sell
+                stocks. Sign up today to take advantage of everything this site has to offer! </p>
+        </div>
+    </section>
+      <br>
+      <div class="row mx-md-n5">
+      <div class="col px-md-5">
+         <div class="p-3 text-center bg-light card">
+                <p class="text-uppercase font-weight-bold title">Recent News</p>
+                <!--          convert these to a href once we work on backend.-->
+                {% for i in articles %}
+                <a class="newsLinks" target="_blank" onclick="return Confirm()" href={{ i.url }}><p class="text-left">{{ i.title }}</p></a>
+                {% endfor %}
+            </div>
+      </div>
+      <div class="col px-md-5">
+         <div class="p-3 text-center bg-light card">
+            <p class="text-uppercase font-weight-bold title">Trending Stocks</p>
+            <table>
+               <tr>
+                   <th>Name</th>
+                   <th>Day High</th>
+                   <th>Day Low</th>
+                   <th>Open</th>
+                   <th>Previous Close</th>
+                   <th>Details</th>
+               </tr>
+               {% for i in details %}
+                   <tr>
+                      <td>{{ i.longName }}</td>
+                      <td>{{ i.dayHigh }}</td>
+                      <td>{{ i.dayLow }}</td>
+                      <td>{{ i.open }}</td>
+                      <td>{{ i.previousClose }}</td>
+                      <td><a href="/stockdetails?stock={{ i.symbol }}">Details</a></td>
+                   </tr>
+               {% endfor %}
+            </table>
+         </div>
+      </div>
+      </div>
+      <script>
+          function Confirm() {
+              return confirm("You are about to leave the page!!! Are you sure?")
+          }
+      </script>
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+         crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+         crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+         crossorigin="anonymous"></script>
+   </body>
+</html>

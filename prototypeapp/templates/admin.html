@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Tradiction</title>
+    <style>
+        body {
+            font-family: "Open Sans", Arial, sans-serif;
+        }
+        .test {
+            margin-top: 100px;
+        }
+
+        .navbar {
+            margin-bottom: 20px;
+        }
+
+    </style>
+
+    <div class="container-fluid">
+    <nav class="navbar navbar-light bg-light justify-content-between">
+        <a class="navbar-brand" href="/index">Tradiction</a>
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" formaction="/search">
+                Search
+            </button>
+        </form>
+
+        <form class="form-inline">
+            {% if lid is not None %}
+                <button type="submit" class="btn btn-sm btn-outline-secondary" formaction="/logout">Logout</button>
+            {% else %}
+                <button type="submit" class="btn btn-sm btn-outline-secondary" formaction="/login">Login</button>
+                <button class="btn btn-outline-success" type="submit" formaction="/registration">Sign Up</button>
+            {% endif %}
+        </form>
+    </nav>
+    </div>
+
+    <div class="container-fluid test">
+        <nav class="navbar navbar-light bg-light justify-content-between">
+            <a class="nav-link" href="/verifytrader">Trader Verification</a>
+            <a class="nav-link" href="/verifyexpert">Expert Verification</a>
+
+        </nav>
+    </div>
+</head>
+<body></body>
+</html>

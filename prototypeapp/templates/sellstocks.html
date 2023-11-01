@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript">
+        function caltotal() {
+
+            var buyquantity = document.getElementById("buyquantity").value;
+            var price = document.getElementById("price").value;
+            var sellquantity = document.getElementById("sellquantity").value;
+
+            if(buyquantity >= sellquantity) {
+                let Total = parseFloat(price) * parseInt(sellquantity);
+                Total = Total.toFixed(2)
+                document.getElementById("total").value = Total;
+                return true
+            }
+                else{
+                    alert("Sell Quantity should be less or equal to buy Quantity")
+                    return false;
+                }
+
+        }
+
+    </script>
+    {% include 'header.html' %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <style>
+
+    .card{
+        background: #f3f3f3;
+        box-shadow: 1px 1px 10px rgba(0,0,0,0.25);
+        border-radius:15px ;
+        border-color: gray;
+     align-content: center;
+         width: max-content;
+
+    }
+
+    </style>
+</head>
+<body>
+    <div class="d-flex justify-content-center">
+        <div class="card">
+            <h3 class="card-title" style="text-align: center; margin-top:10px; "> Sell Stocks </h3>
+	    <form action="/sells" method="post"> {%csrf_token%}
+                  <div class="form-group">
+
+
+                        <label style="padding-right: 110px;margin-left: 100px; ">Name</label>
+                        <input readonly value="{{ name }}" name="sname" style=" width:200px; border: 0px; background-color:#f3f3f3;"> <br> <br>
+                        <input type="hidden" value="{{ symbol }}" name="symbol">
+
+
+
+                  {% for i in rows %}
+                     <div>
+                       <input type="hidden" value="{{ i.0 }}" name="sid">
+
+                         <label style="padding-right:70px ;margin-left: 100px;"> Buying Price</label>
+                           <input type="text" value="{{ i.2 }}" name="cprice" readonly style=" width:100px; border: 0px; background-color:#f3f3f3; margin-right:100px"><br><br>
+
+                         <label style="padding-right:70px ;margin-left: 100px;"> Buy Quantity</label>
+                           <input type="text" value="{{ i.3 }}" name="buyquantity" id="buyquantity" readonly style=" width:100px; border: 0px; background-color:#f3f3f3; margin-right:100px"><br><br>
+
+                           <label style="padding-right: 50px; margin-left: 100px;"> Date And Time</label>
+                          <input readonly type="text" value="{{ i.1 }}" name="datetime" style=" width:100px; border: 0px; background-color:#f3f3f3; margin-right:100px"><br><br>
+                     </div>
+                   {% endfor %}
+                   <div>
+                          <label style="padding-right: 70px; margin-left: 100px;"> Selling Price</label>
+                          <input type="text" value="{{ price }}" name="sellprice" id="price" style=" width:100px; border: 0px; background-color:#f3f3f3; margin-right:100px">
+                                 <br><br>
+
+                          <input type="hidden" name="bid" value={{ bid }}>
+                          <label style="padding-right: 95px; margin-left: 100px;"> Quantity</label>
+                          <input type="number" name="sellquantity" id="sellquantity" onkeyup="return caltotal()" onchange="return caltotal()" style=" width:100px;  margin-right:100px"/><br><br>
+
+                          <label style="padding-right: 120px; margin-left: 100px;"> Total</label>
+                          <input type="text" readonly name="total" id="total" style=" width:100px; border: 0px; background-color:#f3f3f3; margin-right:100px"/><br><br>
+                  </div>
+                          <button type="submit" onclick="return caltotal()"  class="btn btn-success align-center" style="width:20%; background-color: green; margin-left: 175px;" > SELL</button>
+                </form>
+<br>
+</body>
+</html>

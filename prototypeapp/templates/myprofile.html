@@ -1,0 +1,258 @@
+
+<html>
+<head> {% include 'header.html' %}
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            font-family: "Open Sans", Arial, sans-serif;
+        }
+
+        #tab-content {
+            background-color: white;
+        }
+
+        #tab-sidebar {
+            /* This is just to center text in pills */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+
+        }
+
+        #tab-sidebar .nav-link {
+            /* This is just to center text in pills */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: black;
+        }
+
+        #tab-sidebar .active {
+            background-color: rgb(7, 158, 22);;
+            color: white;
+        }
+
+        #tab-sidebar :hover {
+            background-color: rgb(7, 158, 22);
+
+            color: white
+        }
+
+
+        #tab-sidebar .nav-link.col-12 {
+            max-width: calc(100% - 10px);
+
+        }
+
+        .card {
+            background: #f3f3f3;
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.25);
+            border-radius: 15px;
+            border-color: gray;
+            height: 500px;
+            width: 90%;
+        }
+    </style>
+        <script type="text/javascript">
+            function update() {
+                return alert("Data Updated Successfully")
+            }
+
+              function validate()
+         {
+             var Email = document.myform.email.value;
+             var password1 = document.myform.pwd.value;
+              var password2 = document.myform.cpwd.value;
+              var regularExpression = /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z0-9]{7,}$/;
+             var status=false;
+             if (Email === "" )
+             {
+               document.getElementById("mail").innerHTML = "Enter the correct email address";
+               document.getElementById("mail").style.color = "Red";
+               status=false;
+
+             }
+             else if(Email.match(/^[A-Za-z0-9]+@(gmail.com|yahoo.com|yahoo.in|gtu.edu.in|mail.sfsu.edu)$/))
+            {
+                document.getElementById("mail").innerHTML = "Ok input";
+                document.getElementById("mail").style.color = "green";
+               status=true;
+           }
+
+
+           if (!regularExpression.test(password1)) {
+           document.getElementById("pwd").innerHTML = "The password doesnt fulfill the requirement";
+           document.getElementById("cpwd").style.color = "Red";
+
+         status=false;
+         }
+         else if (password1 !== password2) {
+              document.getElementById("pwd").innerHTML = "The password doesn't match";
+               document.getElementById("pwd").style.color = "Red";
+                document.getElementById("cpwd").innerHTML = "The password doesnt match";
+               document.getElementById("cpwd").style.color = "red";
+                  status=false;
+              }
+         else
+         {
+             document.getElementById("pwd").innerHTML = "Password requirements satisfied";
+                 document.getElementById("pwd").style.color = "green";
+              document.getElementById("cpwd").innerHTML = "Password requirements satisfied";
+                document.getElementById("cpwd").style.color = "green";
+                status = true
+
+         }
+
+              return status;
+         }
+        </script>
+</head>
+<body>
+<div class="card bg-light align-item-center">
+    <div class="row">
+        <div id="tab-sidebar" class="col-3 nav nav-pills " role="tablist" aria-orientation="vertical">
+            <a class=" navbar-brand nav-link col-12 ">My Profile</a>
+            <a id="pill-A" class="nav-link col-12 active" data-toggle="pill" href="#tab-A" role="tab"
+               aria-controls="tab-A" aria-selected="true">Personal Information</a>
+            <a id="pill-B" class="nav-link col-12" data-toggle="pill" href="#tab-B" role="tab" aria-controls="tab-B"
+               aria-selected="false">Banking Information</a>
+            <a id="pill-C" class="nav-link col-12" data-toggle="pill" href="#tab-C" role="tab" aria-controls="tab-C"
+               aria-selected="false">Change Password</a>
+
+        </div>
+
+        <div id="tab-content" class="col-9 tab-content">
+            <div id="tab-A" class="tab-pane fade show active" role="tabpanel" aria-labelledby="pill-A">
+                <div class="card-body align-item-center w-75">
+			<form name="myform"> {%csrf_token%}
+                        <div class="form-row">
+
+                        <div class="col form-group">
+                          <label>First name </label>
+                          <input type="text" class="form-control" placeholder="John" name="fname" value= {{ rows.1 }}>
+                       </div> <!-- form-group end.// -->
+
+                      <div class="col form-group">
+                           <label>Last name</label>
+                           <input type="text" class="form-control" placeholder="Smith" name="lname" value= {{ rows.2 }}>
+                         </div> <!-- form-group end.// -->
+                      </div> <!-- form-row end.// -->
+
+                      <div class="form-group">
+                           <label>Email address</label>
+                           <input type="email" class="form-control" placeholder="Johnmith@gmail.com" name="email" value={{ rows.14 }}> <span id="mail"></span>
+
+                       </div> <!-- form-group end.// -->
+
+                       <div class="form-group">
+                            <label>Address</label>
+                            <input type="text" class="form-control" placeholder="1600 Amphitheatre Parkaway" name="address" value= {{ rows.3 }}>
+                       </div> <!-- form-group end.// -->
+
+                       <div class="form-row">
+                               <div class="form-group col-md-4">
+                                    <label>City</label>
+                                    <input type="text" class="form-control"  placeholder= "Mountain View" name="city" value= {{ rows.4 }}>
+                               </div> <!-- form-group end.// -->
+                               <div class="form-group col-md-4">
+                                   <label>State</label>
+                                    <input type="text" class="form-control" placeholder= " CA " name="state" value= {{ rows.5 }}>
+                               </div> <!-- form-group end.// -->
+                                <!-- form-group end.// -->
+                       </div> <!-- form-row.// -->
+
+                       <div class="form-group">
+                           <label>Phone Number</label>
+                           <input type="text" class="form-control" placeholder="012-345-6789" name="phono" value= {{ rows.6 }}>
+                       </div> <!-- form-group end.// -->
+                       <div class="form-group">
+                        <button type="submit" onclick="return validate()" formaction="/updateinfo" class="btn btn-success btn-block" style="width:25%" > Save</button>
+                  </div> <!-- form-group// -->
+                    </div>
+                </form>
+            </div>
+            <div id="tab-B" class="tab-pane fade" role="tabpanel" aria-labelledby="pill-B">
+                <div class="card-body w-75">
+			<form name="myform" method="post"> {%csrf_token%}
+                                    <div class="form-group">
+                                            <div>
+                                             <label>Social Security Number</label>
+                                              </div>
+                                             <input type="text" class="form-control" placeholder="xxx-xx-6789" name="ssnno" value={{ rows.7 }}>
+
+                                        </div> <!-- form-group end.// -->
+                                    <div class="form-group">
+                                            <div>
+                                             <label>Routing Number</label>
+                                              </div>
+                                             <input type="text" class="form-control" placeholder="xxx-xx-6789 " name="routingno" value={{ rows.9 }}>
+
+                                       </div> <!-- form-group end.// -->
+                                    <div class="form-group">
+                                            <div>
+                                             <label>Account Number</label>
+                                              </div>
+                                             <input type="text" class="form-control" placeholder="xxx-xx-6789 " name="accountno" value={{ rows.10 }}>
+                                      </div> <!-- form-group end.// -->
+                        <div class="form-group">
+                        <button type="submit" onclick="return update()" formaction="/updatebankinfo" class="btn btn-success btn-block" style="width:25%" > Save</button>
+                  </div>
+                        </div>
+                    </div>
+            <div id="tab-C" class="tab-pane fade" role="tabpanel" aria-labelledby="pill-C">
+                <div class="card-body w-75">
+                <div class="form-group">
+			<form method="post" action="/updatepwd"> {%csrf_token%}
+                                            <div>
+                                             <label>Current Password</label>
+                                              </div>
+                                             <input type="text" readonly class="form-control" style="color:black" placeholder="********" name="pwd" value={{ rows.15 }}>
+
+                                        </div> <!-- form-group end.// -->
+                                    <div class="form-group">
+                                            <div>
+                                             <label>New Password</label>
+                                              </div>
+                                             <input type="password" class="form-control" placeholder="******** " name="pwd">
+
+                                       </div> <!-- form-group end.// -->
+                                    <div class="form-group">
+                                            <div>
+                                             <label>Confirm Password</label>
+                                              </div>
+                                             <input type="password" class="form-control" placeholder="********" name="cpwd">
+                                        </div> <!-- form-group end.// -->
+                                      <div class="form-group">
+                        <button type="submit" onsubmit="return validate()"  class="btn btn-success btn-block btn-pull-right" style="width:25%" > Save</button>
+                      </form>
+                  </div> <!-- form-group// -->
+                </div>
+                </div>
+
+</div>
+</div> <!-- form-group end.// -->
+
+        </div>
+    </div>
+</div>
+</card>
+
+
+</body>
+  </html>

@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Stocks</title>
+    {% include 'header.html' %}
+    <style>
+        body {
+        font-family: "Open Sans", Arial, sans-serif;
+        font-style: normal;
+     }
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            margin: 30px auto 30px auto;
+        }
+
+        td, th {
+           font-family: "Open Sans", Arial, sans-serif;
+            border-bottom: 1px solid #dddddd;
+            text-align: left;
+            padding: 15px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+         tr:nth-child(2) {
+            border-top: 1px solid #dddddd;
+        }
+        table.sortable thead {
+                background-color:#eee;
+                color: #000000;
+                font-weight: bold;
+                cursor: pointer;
+        }
+.searchBar {
+            width: 500px;
+        }
+    </style>
+
+    <script type="text/javascript" src= {% static "js/jquery_3.4.1_jquery.js" %}></script>
+    <script type="text/javascript" src= {% static "js/sorttable.js" %}></script>
+    <script type="text/javascript">
+        function Confirm(i) {
+            if (i === 0) {
+                let con = confirm("Are you sure you want to remove it from watchlist?")
+                if (con) {
+                    alert("Stock removed from your watchlist")
+                    return true
+                }
+                else{
+                    return false;
+                }
+            }
+            else{
+                alert("Stock added to your watchlist")
+            }
+        }
+    </script>
+<body>
+	<div class="container-fluid">
+                <input class="searchBar form-control mr-sm-2" type="search" placeholder="Search for Stock name or symbol" aria-label="Search" name="search" id="search">
+                <table class="sortable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Ticker</th>
+                        <th class="sorttable_nosort">Details</th>
+                        <th class="sorttable_nosort">Watchlist</th>
+                    </tr>
+                </thead>
+            <tbody id="stocks">
+            {% for i in rows %}
+                <tr>
+                    <td>{{ i.2 }}</td>
+                    <td>{{ i.1 }}</td>
+                    <td><a href="/stockdetails?stock={{ i.1 }}">Details</a></td>
+
+                    {% if lid is not None %}
+                        {% if i.1 in symbols %}
+                            <td><a onclick="return Confirm(0)" href="/removefromwatchlist?symbol={{ i.1 }}" style="-webkit-text-fill-color: red">Remove from Watchlist</a></td>
+                        {% else %}
+                            <td><a onclick="Confirm(1)" href="/addtowatchlist?symbol={{ i.1 }}">Add to Watchlist</a></td>
+                        {% endif %}
+                    {% else %}
+                        <td><a href="/addtowatchlist?symbol={{ i.1 }}">Add to Watchlist</a></td>
+                    {% endif %}
+
+                </tr>
+            {% endfor %}
+            </tbody>
+	    </table>
+	</div>
+
+    <script>
+            $(document).ready(function() {
+                $("#search").on("keyup", function() {
+                    let value = $(this).val().toLowerCase();
+                    $("#stocks tr").filter(function() {
+                        $(this).toggle($(this).text()
+                        .toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+</body>
+</html>

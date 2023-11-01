@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    {% include 'header.html' %}
+
+     <script type="text/javascript">
+
+        function caltotal() {
+            //print("hello")
+            let price = document.getElementById("price").value;
+            let quantity = document.getElementById("quantity").value;
+
+            let Total = parseFloat(price) * parseInt(quantity);
+            Total = Total.toFixed(2)
+            document.getElementById("total").value = Total;
+        }
+
+    </script>
+
+  <style>
+
+    .card{
+        background: #f3f3f3;
+        box-shadow: 1px 1px 10px rgba(0,0,0,0.25);
+        border-radius:15px ;
+        border-color: gray;
+        align-content: center;
+         width: max-content;
+        size: 10px;
+
+    }
+
+
+
+        </style>
+</head>
+<body >
+  <div class= "d-flex justify-content-center">
+    <div class="card" >
+
+        <h4 class="card-title" style="text-align: center; margin-top:10px;" > Buy Stocks </h4>
+	<form action="/buystocks" method="post"> {%csrf_token%}
+
+             <div id="inputfield" class="form-group align-content-center ">
+
+                 <div >
+                  <input type="hidden" value="{{ details.2 }}" name="sid">
+                    <label style="padding-right: 100px;margin-left: 100px;">Name</label>
+                   <input readonly value="{{ details.0 }}" name="sname" style=" width:100px; border: 0px; background-color:#f3f3f3; margin-right:100px"> <br><br>
+                  </div>
+
+                  <div>
+                    <label style="padding-right: 105px;margin-left: 100px;">Price</label>
+                      <input  value="{{ details.1 }}" id="price" name="cprice" style=" width: 100px; border: 0px; background-color:#f3f3f3; margin-right:100px""><br><br>
+                  </div>
+
+                  <div>
+                    <label style="padding-right: 80px;margin-left: 100px;"> Quantity</label>
+                    <input type="number" name="quantity" id="quantity" onchange="caltotal()" onkeyup="caltotal()" style=" width: 100px; margin-right:100px"/><br><br>
+                  </div>
+
+                  <div>
+                    <label style="padding-right: 105px;margin-left: 100px;">Total</label>
+                    <input readonly name="total" id="total" style=" width: 100px; border: 0px; background-color:#f3f3f3; margin-right:100px"/><br><br>
+                  </div>
+
+                   <button type="submit" formaction="/buystocks" class="btn btn-success align-center" style="width:20%; background-color: green; margin-left: 175px;" > BUY</button>
+
+
+
+          </div>
+         </form>
+        </div>
+      </div>
+      </body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% include 'admin.html' %}
+    <style>
+        body {
+            font-family: "Open Sans", Arial, sans-serif;
+        }
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    {% if rows %}
+    <table border="2px">
+        <tr>
+            <th>Expert ID</th>
+            <th> First Name</th>
+            <th> Last Name </th>
+            <th> Address </th>
+            <th> City </th>
+            <th> State </th>
+            <th>Mobile Number</th>
+            <th>SSN Number</th>
+            <th> Accept</th>
+            <th> Reject</th>
+        </tr>
+
+        {% for i in rows %}
+
+            <tr>
+                <td> {{ i.0 }}</td>
+                <td>{{ i.1 }}</td>
+                <td>{{ i.2 }}</td>
+                <td>{{ i.3 }}</td>
+                <td>{{ i.4 }}</td>
+                <td>{{ i.5 }}</td>
+                <td>{{ i.6 }}</td>
+                <td>{{ i.7 }}</td>
+                <td align="center"><a href="/acceptexpert?id={{ i.0 }}"> Accept</a></td>
+                <td align="center"><a href="/rejectexpert?id={{ i.0 }}"> Reject</a></td>
+            </tr>
+
+        {% endfor %}
+    </table>
+    {% else %}
+    <h2 style="text-align: center">You are all caught up !!!</h2>
+    {% endif %}
+<br>
+
+</body>
+</html>

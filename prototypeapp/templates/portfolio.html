@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/fonts.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    {% include "header.html" %}
+    <title>Portfolio</title>
+    <style>
+        body {
+            font-family: "Open Sans", Arial, sans-serif;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto 20px auto;
+        }
+
+        td, th {
+            /*border: 2px solid #dddddd;*/
+            font-family: "Open Sans", Arial, sans-serif;
+            border-bottom: 1px solid #dddddd;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .card {
+            width: 98%;
+            margin: auto
+        }
+
+	.bg {
+            height: 320px;
+            font-family: "Open Sans", Arial, sans-serif;
+            font-style: normal;
+            /*background-image: url(../static/bg.jpg);*/
+            background-position: center;
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-color: rgba(41, 43, 44, 0.9);
+            background-blend-mode: darken;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+
+</head>
+<body>
+<div class="jumbotron jumbotron-fluid bg">
+  <div class="container">
+    <h3 class="text-center">Below is a list of your purchased stocks</h3>
+  </div>
+</div>
+	<div class="card bg-light">
+    <div class="container-fluid">
+        <div id="StockGraph"></div>
+        <table>
+            <tr>
+                <th>Serial #</th>
+                <th>Name</th>
+                <th>Buying Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Date and Time</th>
+                <th>Current Price</th>
+                <th>Sell</th>
+            </tr>
+            {% for i in rows %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.5 }}</td>
+                <td>{{ i.2 }}</td>
+                <td>{{ i.3 }}</td>
+                <td>{{ i.4 }}</td>
+                <td>{{ i.1 }}</td>
+                <td>{{ i.7 }}</td>
+                <td align="center"><a href="/sellstocks?bid={{i.0}}&symbol={{ i.6 }}"> SELL</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<html>
+<head>
+    {% include 'header.html' %}
+    <title>Help</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: "Open Sans", Arial, sans-serif;
+        }
+
+        .navbar {
+            height: 50px;
+        }
+
+        .nav-link {
+            color: white;
+            float: right;
+            border: none;
+            cursor: pointer;
+            padding: 3px 3px;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .nav-link:hover {
+            color: green;
+            transition: 0.5s;
+            font-size: 22px;
+            border-top: 10px;
+            border-bottom: 10px;
+        }
+
+        .btnGroup {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btns {
+            margin: 15px;
+            width: 300px;
+            height: 200px;
+        }
+
+        .col {
+            margin-left: 11%;
+            margin-right: 11%;
+        }
+
+        h1 {
+            font-size: 32px;
+            letter-spacing: 0.15em;
+        }
+
+        h5 {
+            font-size: 26px;
+            letter-spacing: 0.15em;
+        }
+
+        .q {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .a {
+            font-size: 20px;
+        }
+
+        .send {
+            width: 200px;
+            height: 45px;
+        }
+    </style>
+    <script>
+        function myFunction(clickedbutton) {
+            buttontype = clickedbutton
+            if (buttontype == "faq") {
+                document.getElementById("contactus").classList.remove("active");
+                document.getElementById("faq").classList.add("active");
+
+                document.getElementById("faqcontainer").style.display = "block";
+                document.getElementById("supportcontainer").style.display = "none";
+                document.getElementById("contactcontainer").style.display = "none";
+
+            } else if (buttontype == "support") {
+                document.getElementById("faqcontainer").style.display = "none";
+                document.getElementById("supportcontainer").style.display = "block";
+                document.getElementById("contactcontainer").style.display = "none";
+            } else {
+                document.getElementById("faq").classList.remove("active");
+                document.getElementById("contactus").classList.add("active");
+
+                document.getElementById("faqcontainer").style.display = "none";
+                document.getElementById("supportcontainer").style.display = "none";
+                document.getElementById("contactcontainer").style.display = "block";
+            }
+
+        }
+    </script>
+</head>
+<body>
+<!-- when you click on a button, change the container -->
+<br>
+<div class="container btnGroup">
+    <button type="button" class="btn btn-light active btns" id="faq" onclick="myFunction(this.id)"><h1>FAQ</h1></button>
+    <button type="button" class="btn btn-light disabled btns" id="support" onclick=""><h1 class="text-uppercase">24/7
+        Support</h1>(Under Maintenance)
+    </button>
+    <button type="button" class="btn btn-light btns" id="contactus" onclick="myFunction(this.id)"><h1
+            class="text-uppercase">Contact Us</h1></button>
+</div>
+
+<br>
+<div id="faqcontainer" class="container-fluid" style="display: block">
+    <div class="row mx-md-n5">
+        <div class="col">
+            <div class="p-3 card bg-light text-center">
+                <h5 class="text-uppercase mb-4">Common FAQs</h5>
+                <div class="text-left">
+                    <p class="q">What is Tradiction?</p>
+                    <p class="a">Tradiction is a site that is catered to help you make the best financial decisions
+                        in the stock market. We work to keep your experience hassle-free by serving as a one-stop shop
+                        where you can not only watch the stock market, but also purchase and sell stocks all with the
+                        click of a button.</p>
+                    <br>
+                    <p class="q">Is Tradiction free?</p>
+                    <p class="a">Tradiction's services are completely free to use, but the purchasing of stocks will be
+                        reliant on the users' bank account.</p>
+                    <br>
+                    <p class="q">Is this website secure?</p>
+                    <p class="a">Yes, our website is secure. All confidential information is encrypted before being
+                        saved in our database.</p>
+                    <br>
+                    <p class="q">How does the application make predictions?</p>
+                    <p class="a">Our application makes predictions through user posts on Twitter. The algorithm we
+                        use has been engineered to compile the data from Twitter and accurately make predictions on
+                        when to buy or sell stock.</p>
+                    <br>
+                    <p class="q">My account status is still awaiting verification, how should I proceed?</p>
+                    <p class="a">Account verification takes about 2 days. If the status of your account has still not
+                        been resolved within that timeframe, please send a ticket using the "Contact Us" button.</p>
+                    <br>
+                    <!-- use this as a template to add new questions -->
+                    <!-- <p class = "font-weight-bold">Is this website secure?</p>
+                    <p>Yes, all confidential information is encrypted before being saved in our database.</p>
+                    <br>
+                    <br> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="supportcontainer" class="container-fluid" style="display: none">
+    <!-- enter contents of 24/7 here -->
+</div>
+<div id="contactcontainer" class="container-fluid" style="display: none">
+    <div class="row mx-md-n5">
+        <div class="col">
+            <div class="p-3 card bg-light text-center">
+                <h5 class="text-uppercase mb-4">Here's how to reach us!</h5>
+                <div class="text-left">
+                    <form>
+                        <div class="form-row form-group">
+                            <input type="email" class="form-control"
+                                   placeholder="Enter your email to be contacted at here:" name="fname">
+                        </div>
+                        <div class="form-row form-group">
+                            <textarea class="form-control" rows="5" placeholder="Insert message here:"></textarea>
+                        </div>
+                        <div class="text-center">
+                        <button type="submit" class="btn btn-success send">Send</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>

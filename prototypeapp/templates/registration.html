@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+</head>
+<body>
+    <form action="/prototypeapp/regdata" method="post" enctype="multipart/form-data" > {% csrf_token %}
+        NAME: <input type="text" name="name" > <br> <br>
+        USERNAME: <input type="text" name="email"> <br> <br>
+        ADDRESS: <input type="text"  name="address" > <br> <br>
+        PHONE NUMBER: <input type="text" name="phno"> <br> <br>
+        Social Security Number: <input type="text" name="ssn"> <br> <br>
+        Bank Statement: <input type="file" name="bankst"> <br> <br>
+        PASSWORD: <input type="password" name="password"> <br> <br>
+        CONFIRM PASSWORD: <input type="password" name="cpassword"><br> <br>
+        <input type="submit" name="Submit">
+    </form>
+</body>
+</html>

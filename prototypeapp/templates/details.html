@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Required meta tags -->
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+     <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+     <title>Detailed Stocks</title>
+    {% include "header.html" %}
+     <style>
+        .navbar {
+        height: 50px;
+        }
+        .nav-link {
+        color:white;
+        float: right;
+        background-color: none;
+        border: none;
+        border-color: none;
+        cursor: pointer;
+        padding: 3px 3px;
+        font-size: 20px;
+        text-align: center;
+        }
+        .nav-link:hover
+        {
+        color:green;
+        transition:0.5s;
+        font-size:22px;
+        border-top:10px;
+        border-bottom:10px;
+        }
+        body {
+            font-family: "Open Sans", Arial, sans-serif;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 30px auto 30px auto;
+        }
+
+        td, th {
+            /*border: 1px solid lightgreen;*/
+            font-family: "Open Sans", Arial, sans-serif;
+            border-bottom: 1px solid #dddddd;
+            text-align: left;
+            padding: 15px;
+        }
+
+        .card {
+            width: 98%;
+            margin: auto
+        }
+     </style>
+   <script type="text/javascript">
+
+    function Confirm(){
+        return confirm("Stock will be removed from your watchlist?")
+        }
+    </script>
+</head>
+<body>
+
+    <div class= "container-fluid">
+        <div class="row mx-md-n5">
+             <div class="col">
+                 <h2> {{ details.longName }} ({{ details.symbol }})</h2>
+             </div>
+             <div class="col text-right">
+                 <!-- wire these buttons with the backend below -->
+             <form>
+                <input type="hidden" value="{{ details.symbol }}" name="symbol">
+                <input type="hidden" value="{{ sid.0 }}" name="id" >
+                {% if flag == 1 %}
+                    <button type= "submit" onclick="return Confirm()" formaction="/removefromwatchlist" class="btn btn-danger">Remove from Watchlist</button>
+                {% elif flag == 0 %}
+                    <button type= "submit" formaction="/addtowatchlist" class="btn btn-outline-success">Add to Watchlist</button>
+                {% endif %}
+
+                 {% if lid %}
+                    <button type= "submit" formaction="/addstocks?id={{ sid.0 }}&symbol={{ details.symbol }}" class="btn btn-success">BUY</button>
+                 {% else %}
+                    <button formaction="/login" type= "submit" class="btn btn-success">BUY</button>
+                 {% endif %}
+             </form>
+             </div>
+         </div>
+         <br>
+         <div class="card bg-light">
+             <div class="container-fluid">
+             <table>
+                 <tr>
+                     <th>Previous Close</th>
+                     <td>{{ details.previousClose }}</td>
+                     <th>Market Cap</th>
+                     <td>{{ details.marketCap }}</td>
+                 </tr>
+                 <tr>
+                     <th>Open</th>
+                     <td>{{ details.open }}</td>
+                     <th>Beta</th>
+                     <td>{{ details.beta }}</td>
+                 </tr>
+                 <tr>
+                     <th>Bid</th>
+                     <td>{{ details.bid }} x {{ details.askSize }}</td>
+                     <th>Ask</th>
+                     <td>{{ details.ask }} x {{ details.askSize }}</td>
+                 </tr>
+                 <tr>
+                     <th>Day's Range</th>
+                     <td>{{ details.dayLow }} - {{ details.dayHigh }}</td>
+                     <th>52 Week Range</th>
+                     <td>{{ details.fiftyTwoWeekLow }} - {{ details.fiftyTwoWeekHigh }}</td>
+                 </tr>
+                 <tr>
+                     <th>Volume</th>
+                     <td>{{ details.volume }}</td>
+                     <th>Avg. Volume</th>
+                     <td>{{ details.averageVolume }}</td>
+                 </tr>
+                 </table>
+             </div>
+         </div>
+
+
+
+        <br>
+
+        <div align="center"><h4>{{ twitter.4 }}</h4></div>
+        <br>
+
+        <!-- need to rewire and delete after-->
+
+        </div>
+    </div>
+
+</body>
+</html>
