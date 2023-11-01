@@ -1,0 +1,5 @@
+django
+get-all-tickers
+mysql-connector-python
+newsapi-python
+yfinance
